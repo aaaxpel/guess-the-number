@@ -36,14 +36,19 @@ func chooseDifficulty() {
 }
 
 func play() bool {
-	var guess string
+	if guessesLeft <= 0 {
+		fmt.Printf("Unfortunately you didn't guess %v.\n\n", number)
+		return false
+	}
+
 	if guessesLeft > 0 {
 		fmt.Print("Enter your guess: ")
+		var guess string
 		fmt.Scan(&guess)
 		guessedNumber, err := strconv.Atoi(guess)
 		if err != nil || guessedNumber > 100 || guessedNumber < 1 {
 			fmt.Println("Please choose a number between 1 - 100")
-			play()
+			return play()
 		}
 
 		guessesLeft--
@@ -51,16 +56,14 @@ func play() bool {
 		switch {
 		case guessedNumber > number:
 			fmt.Printf("Incorrect! The number is less than %v. Guesses left: %v\n\n", guessedNumber, guessesLeft)
-			play()
+			return play()
 		case guessedNumber < number:
 			fmt.Printf("Incorrect! The number is greater than %v. Guesses left: %v\n\n", guessedNumber, guessesLeft)
-			play()
+			return play()
 		case guessedNumber == number:
 			fmt.Printf("Congratulations! You guessed the number in %v attempts.\n\n", guesses-guessesLeft)
 			return true
 		}
-	} else {
-		fmt.Printf("Unfortunately you didn't guess %v.\n\n", number)
 	}
 	return false
 }
