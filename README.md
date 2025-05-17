@@ -6,6 +6,8 @@ A small CLI project suggested by [roadmap.sh](https://roadmap.sh/projects/number
 ## How to run
 
 ```bash
-  $ go run main.go
+  git clone https://github.com/aaaxpel/guess-the-number.git
+  cd guess-the-number
+  go run main.go
 ```
     
